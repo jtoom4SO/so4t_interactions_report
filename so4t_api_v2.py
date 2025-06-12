@@ -21,7 +21,11 @@ class V2Client(object):
             self.team_slug = args.url.split("https://stackoverflowteams.com/c/")[1]
             self.token = args.token
             self.api_key = None
-            self.headers = {'X-API-Access-Token': self.token}
+            # Add User-Agent header
+            self.headers = {
+            'X-API-Access-Token': self.token,
+            'User-Agent': 'so4t_interactions_report/1.0 (http://your-app-url.com; your-contact@email.com)'
+        }
             if not self.token:
                 print("Missing required argument. Please provide an API token.")
                 print("See --help for more information")
@@ -32,7 +36,11 @@ class V2Client(object):
             self.team_slug = None
             self.token = None
             self.api_key = args.key
-            self.headers = {'X-API-Key': self.api_key}
+            # Add User-Agent header
+            self.headers = {
+            'X-API-Key': self.api_key,
+            'User-Agent': 'so4t_interactions_report/1.0 (http://your-app-url.com; your-contact@email.com)'
+        }
             if not self.api_key:
                 print("Missing required argument. Please provide an API key.")
                 print("See --help for more information")
@@ -49,10 +57,18 @@ class V2Client(object):
 
         params = {}
         if self.token:
-            headers = {'X-API-Access-Token': self.token}
+            # Add User-Agent header
+            headers = {
+            'X-API-Access-Token': self.token,
+            'User-Agent': 'so4t_interactions_report/1.0 (http://your-app-url.com; your-contact@email.com)'
+        }
             params['team'] = self.team_slug
         else:
-            headers = {'X-API-Key': self.api_key}
+            # Add User-Agent header
+            headers = {
+            'X-API-Key': self.api_key,
+            'User-Agent': 'so4t_interactions_report/1.0 (http://your-app-url.com; your-contact@email.com)'
+        }
 
         print("Testing API 2.3 connection...")
         try:
